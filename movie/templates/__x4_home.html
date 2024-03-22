@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container">
+    <form action="">
+        <div class="mb-3">
+          <label class="form-label">Search for Movie</label>
+          <input type="text" class="form-control" name="vsiSearchMovie">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>  
+    <p>Searching for {{ vsoSearchTerm }}</p>
+        {% for movie in vsoMovies %}
+            <div v-for="movie in vsoMovies" class="col">
+                <div class="card">
+                    <img src="{{ movie.image.url }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ movie.title }}</h5>
+                        <p class="card-text">{{ movie.description }}</p>
+                        {% if movie.url %}
+                        <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
+                        {% endif %}
+                    </div>
+                </div>                
+            </div>
+        {% endfor %}
+
+    <br />
+    <br />
+    <h2>Join our mailing list:</h2>
+    <form action="{% url 'vspSignUp' %}">
+        <div class="mb-3">
+            <label class="form-label">Enter your email:</label>
+            <input type="email" class="form-control" name="vsiEmail">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

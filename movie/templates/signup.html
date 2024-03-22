@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container">
+    <h2>Added {{ vsoEmail }} to mailing list</h2>
+    <a href="{% url 'vspMovieHome' %}">Home</a>
+
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
+</html>

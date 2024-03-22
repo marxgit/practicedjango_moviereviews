@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+
+<div class="container">
+    {% for news in vsoNews %}
+    <div v-for="movie in vsoMovies" class="col">
+        <div class="card mb-3">
+            <div class="row g-o">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ news.headline }}</h5>
+                <p class="card-text">{{ news.body }}</p>
+                <p class="card-text">
+                    <small class="text-muted">{{ news.date }}</small>
+                </p>
+            </div>
+        </div>                
+    </div>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

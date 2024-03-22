@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+    {% block content %}
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ vdoMovie.image.url }}" class="img-fluid roundd-start" alt="">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ vdoMovie.title }}</h5>
+                <p class="card-text">{{ vdoMovie.description }}</p>
+                <p class="card-text">
+                    {% if vdoMovie.url %}
+                    <a href="{{ vdoMovie.url }}" class="btn btn-primary">Movie Link</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'vspMovieCreateReview' vdoMovie.id %}" class="btn btn-primary">
+                        Add Review
+                    </a>
+                    {% endif %}
+                </p>
+                <h3>Reviews</h3>
+                <ul class="list-group">
+                    {% for review in vloReviews %}
+                    <li class="list-group-item pb-3 pt-3">
+                        <h5 class="card-title">
+                            Reviewed by {{ review.user.username }}
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{ review.date }}
+                        </h6>
+                        <p class="card-text">{{ review.text }}</p>
+                        {% if user.is_authenticated and user == review.user %}
+                        <a class="btn btn-primary me-2" href="{% url 'vspMovieUpdateReview' review.id %}">Update</a>
+                        <a class="btn btn-danger" href="{% url 'vspMovieDeleteReview' review.id %}">Delete</a>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

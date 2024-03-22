@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+    {% block content %}
+
+    {% for news in vloNews %}
+    <div class="card mb-3">
+        <div class="row g-o">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title fw-bold">{{ news.headline }}</h5>
+            <p class="card-text">{{ news.body }}</p>
+            <p class="card-text">
+                <small class="text-muted">{{ news.date }}</small>
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% endblock %}
